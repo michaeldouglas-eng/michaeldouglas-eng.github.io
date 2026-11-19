@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Michael Douglas Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a drawing-sheet column. Each project is a "sheet" with a title-block strip, hero, detail row, and P/A/R lines. */
+:root{
+  --bg:#f7f7f5; --sheet:#ffffff; --fg:#14171c; --mute:#5b5f66; --line:#dcdcd6; --accent:#d9731a; --chip:#efeee9; --paper:#ffffff;
+  --display:"Space Grotesk",Inter,system-ui,sans-serif; --body:Inter,system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0e1116;--sheet:#151920;--fg:#eceae4;--mute:#a3a7ad;--line:#2a2f38;--accent:#f28c28;--chip:#1d222b;--paper:#ffffff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1116;--sheet:#151920;--fg:#eceae4;--mute:#a3a7ad;--line:#2a2f38;--accent:#f28c28;--chip:#1d222b;--paper:#ffffff;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 64px}
+.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+a{color:var(--accent)}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+header.top{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;border-bottom:2px solid var(--fg);padding-bottom:20px}
+header.top h1{font-size:clamp(34px,6vw,56px);line-height:1;letter-spacing:-.02em}
+header.top p{margin:10px 0 0;color:var(--mute);max-width:60ch}
+.idx{display:flex;flex-direction:column;gap:4px;text-align:right}
+.idx a{font-family:var(--mono);font-size:13px;text-decoration:none;color:var(--fg)}
+.idx a span{color:var(--accent)}
+.sheet{background:var(--sheet);border:1px solid var(--line);display:flex;flex-direction:column}
+.tb{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;border-bottom:1px solid var(--line);padding:12px 20px}
+.tb .no{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:500}
+.tb h2{font-size:clamp(22px,3vw,28px)}
+.tb .meta{font-family:var(--mono);font-size:11px;color:var(--mute);text-align:right;letter-spacing:.05em;text-transform:uppercase}
+.body{padding:20px;display:flex;flex-direction:column;gap:20px}
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:20px;align-items:start}
+.hero > *{min-width:0}
+figure{margin:0;display:flex;flex-direction:column;gap:6px}
+figure img{width:100%;display:block;border:1px solid var(--line);background:var(--paper)}
+figcaption{font-size:13px;color:var(--mute)}
+.par{display:flex;flex-direction:column;gap:12px}
+.par div{display:grid;grid-template-columns:84px 1fr;gap:12px;border-top:1px solid var(--line);padding-top:10px}
+.par div:first-child{border-top:0;padding-top:0}
+.par b{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding-top:3px}
+.par p{margin:0}
+.row{display:grid;gap:12px}
+.r3{grid-template-columns:repeat(3,1fr)}
+.r4{grid-template-columns:repeat(4,1fr)}
+.r2{grid-template-columns:repeat(2,1fr)}
+.row > *{min-width:0}
+.crop img{aspect-ratio:4/3;object-fit:cover}
+.tall img{aspect-ratio:3/4;object-fit:cover}
+.chips,.par div.chips{display:flex;flex-wrap:wrap;gap:6px;border-top:0;padding-top:0}
+.chip{font-family:var(--mono);font-size:12px;background:var(--chip);border:1px solid var(--line);padding:3px 8px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);font-weight:500;border-bottom:1px solid var(--fg);padding:6px 8px}
+td{border-bottom:1px solid var(--line);padding:7px 8px;vertical-align:top}
+td:first-child{white-space:nowrap;font-weight:600}
+h3{font-size:17px}
+.pending{border:1px dashed var(--line);padding:20px;color:var(--mute);font-size:14px}
+footer{color:var(--mute);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
+@media (max-width:760px){
+  header.top{grid-template-columns:1fr}.idx{text-align:left}
+  .hero,.r2{grid-template-columns:1fr}.r3,.r4{grid-template-columns:repeat(2,1fr)}
+  .tb{grid-template-columns:auto 1fr}.tb .meta{display:none}
+  .par div{grid-template-columns:1fr;gap:2px}
+}
+</style>
+</head><body>
+
+<div class="wrap">
+<header class="top">
+  <div>
+    <div class="mono">Engineering portfolio · personal projects</div>
+    <h1>Michael Douglas</h1>
+    <p>Electrical engineer (B.S., University of Maryland). I design, build and test hardware end to end: brushless motors and motor controllers, a custom quadcopter with its own flight firmware, and the rigs to test them safely.</p>
+  </div>
+  <nav class="idx" aria-label="Projects">
+    <a href="#motor"><span>01</span> BLDC motor</a>
+    <a href="#sentinel"><span>02</span> Sentinel quadcopter</a>
+    <a href="#esc"><span>03</span> Motor controller</a>
+    <a href="#rigs"><span>04</span> Test equipment</a>
+  </nav>
+</header>
+
+<!-- 01 MOTOR -->
+<section class="sheet" id="motor">
+  <div class="tb"><span class="no">01</span><h2>Custom brushless outrunner motor</h2><span class="meta">12-slot / 14-pole · SolidWorks · 2026</span></div>
+  <div class="body">
+    <div class="hero">
+      <figure><img src="img/stator.jpg" alt="Wound 12-tooth laminated stator, CAD render"><figcaption>Prototype 2 stator: laminated electrical steel, 12 wound teeth.</figcaption></figure>
+      <div class="par">
+        <div><b>Problem</b><p>Understand, then eventually replace, the off-the-shelf motors on my quadcopter.</p></div>
+        <div><b>Approach</b><p>Built an air-core PLA prototype first to prove the winding and test method, then redesigned with an iron core, changing one variable so the gain is measurable. Lamination went through five DXF revisions (V1–V5).</p></div>
+        <div><b>Result</b><p>Prototype 1 spins on a commercial BLHeli ESC, with back-EMF captured on a scope. Prototype 2 design is frozen and released as a machine-shop quote pack: four toleranced part drawings plus the lamination drawing.</p></div>
+        <div class="chips"><span class="chip">Magnetic design</span><span class="chip">Winding layout</span><span class="chip">GD&amp;T / tolerancing</span><span class="chip">DFM</span><span class="chip">Oscilloscope</span></div>
+      </div>
+    </div>
+    <div class="row r3">
+      <figure class="crop"><img src="img/bell.jpg" alt="Rotor bell CAD"><figcaption>Rotor bell with vented top plate.</figcaption></figure>
+      <figure class="crop"><img src="img/backiron.jpg" alt="Section through magnet and back iron"><figcaption>Magnet bonded to a steel back-iron ring.</figcaption></figure>
+      <figure class="crop"><img style="object-fit:contain" src="img/statdrw.jpg" alt="Stator lamination drawing"><figcaption>Lamination drawing (V5) for etch or wire-EDM.</figcaption></figure>
+    </div>
+    <h3>Machining drawings</h3>
+    <div class="row r4">
+      <figure><img src="img/d_BELL.jpg" alt="Rotor bell drawing"><figcaption>Rotor bell</figcaption></figure>
+      <figure><img src="img/d_FLANGE.jpg" alt="Base flange drawing"><figcaption>Base / hub: bearing seats in one setup</figcaption></figure>
+      <figure><img src="img/d_SHAFT.jpg" alt="Shaft drawing"><figcaption>Shaft: h6 journals, circlip groove</figcaption></figure>
+      <figure><img src="img/d_BACK_IRON.jpg" alt="Back iron drawing"><figcaption>Back-iron ring</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 02 SENTINEL -->
+<section class="sheet" id="sentinel">
+  <div class="tb"><span class="no">02</span><h2>Sentinel quadcopter</h2><span class="meta">~300 g · C/C++ firmware · 2026</span></div>
+  <div class="body">
+    <div class="row r2">
+      <figure class="crop"><img style="object-position:left center" src="img/q_cad.jpg" alt="Sentinel full CAD assembly"><figcaption>Designed: full assembly with sensors and electronics modeled to pin level.</figcaption></figure>
+      <figure class="crop"><img style="object-position:left center" src="img/q_built.jpg" alt="Sentinel built quadcopter"><figcaption>Built: 3D-printed frame, hand-wired flight electronics.</figcaption></figure>
+    </div>
+    <div class="par">
+      <div><b>Problem</b><p>Build a small quadcopter from the subsystem level up, with my own flight-control firmware on an 8-bit microcontroller (32 KB flash).</p></div>
+      <div><b>Approach</b><p>Wrote C/C++ flight control: 200 Hz attitude, altitude and optical-flow position loops. Iterated the frame in CAD (arm V0 → V1_3, legs V1 → V3), split every part to fit a 7 × 7 in print bed, and checked arm stress with FEA. Logged 14 channels of telemetry at 25 Hz on every flight. Designed its custom brushless motor controller (section 03).</p></div>
+      <div><b>Result</b><p>Stable 18 s position holds at 300 mm. Hold error dropped from 132 to 69 mm RMS across firmware versions, and every flight anomaly was root-caused from the logs.</p></div>
+    </div>
+    <div class="row r3">
+      <figure><img src="img/xy.jpg" alt="Position hold track chart, flight 1 versus flight 11"><figcaption>Hold track at 300 mm: v19 vs v20 firmware.</figcaption></figure>
+      <figure><img src="img/rms.jpg" alt="Bar chart of hold error over 14 flights"><figcaption>Hold error across 14 flights; anomalies in red.</figcaption></figure>
+      <figure><img src="img/f10.jpg" alt="Motor command and roll during flight 10"><figcaption>Flight 10: logs showed a lost motor connection, not a tuning fault.</figcaption></figure>
+    </div>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>Item</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Thrust budget</td><td>~130 g per motor, ~510 g total; thrust-to-weight ≈ 1.7</td></tr>
+        <tr><td>Arm FEA</td><td>Peak ~5.8 MPa at 3 N per arm (≈2.3× max motor thrust)</td></tr>
+        <tr><td>Yaw bias</td><td>Traced to one motor producing ~3.6× the reaction torque of the others</td></tr>
+        <tr><td>Sensors</td><td>IMU, time-of-flight altimeter (I²C), optical flow (SPI)</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- 03 ESC -->
+<section class="sheet" id="esc">
+  <div class="tb"><span class="no">03</span><h2>Custom brushless motor controller</h2><span class="meta">4-channel PCB · bring-up · 2026</span></div>
+  <div class="body">
+    <div class="row r2">
+      <figure class="crop"><img style="object-position:center 80%" src="img/esc_top.jpg" alt="Assembled motor controller board"><figcaption>Assembled 4-channel board.</figcaption></figure>
+      <figure class="crop"><img src="img/esc_bench.jpg" alt="Bench demo with four motors"><figcaption>Bench demo: one controller driving four motors.</figcaption></figure>
+    </div>
+    <div class="par">
+      <div><b>Problem</b><p>Off-the-shelf motor controllers are a black box. I wanted one I understand down to the comparator, for Sentinel and future aircraft.</p></div>
+      <div><b>Approach</b><p>Simulated each block in LTspice, laid out a 4-layer PCB, had it fabricated and assembled, then flashed open-source AM32 firmware to all four channels. When motors lost sync on first spin, I ruled out firmware and power-stage causes in order, then simulated the back-EMF sense network.</p></div>
+      <div><b>Result</b><p>Found a filter mismatch putting ~11 µs of false timing error after every PWM edge. Removing one part fixed it, and the board now drives motors on the bench. Next revision matches the sense filters on all channels.</p></div>
+    </div>
+    <figure><img src="img/esc_block.jpg" alt="Motor controller block diagram"><figcaption>Block diagram, one of four channels.</figcaption></figure>
+  </div>
+</section>
+
+<!-- 04 RIGS -->
+<section class="sheet" id="rigs">
+  <div class="tb"><span class="no">04</span><h2>Test equipment</h2><span class="meta">Gimbal rig · thrust stand · 2026</span></div>
+  <div class="body">
+    <div class="row r3">
+      <figure class="tall"><img src="img/ph_frame.jpg" alt="Built PVC gimbal rig"><figcaption>Built: PVC frame, rings printed in bolted sections.</figcaption></figure>
+      <figure class="tall"><img src="img/ph_lock.jpg" alt="Slide-in axis lock"><figcaption>Slide-in lock on each axis.</figcaption></figure>
+      <figure class="tall"><img src="img/ph_sentinel.jpg" alt="Sentinel mounted in the gimbal rig"><figcaption>Sentinel at the center of rotation.</figcaption></figure>
+    </div>
+    <div class="par">
+      <div><b>Problem</b><p>Tune and verify each control loop without risking the aircraft or myself.</p></div>
+      <div><b>Approach</b><p>Designed an orbital 3-axis tuning rig with roll, roll-pitch and roll-pitch-yaw configurations (each lockable, so one loop is tuned at a time), plus a linear rig. Built a thrust stand with a load cell (HX711), INA226 voltage/current sensing and an IR RPM sensor, alongside a watt meter.</p></div>
+      <div><b>Result</b><p>Measured the thrust budget and motor imbalance that set the flight-controller tuning, and moved first spin-ups off the bench and into a constrained rig.</p></div>
+    </div>
+    <figure><img src="img/gimbal3.jpg" alt="Gimbal rig CAD in three configurations"><figcaption>Gimbal rig CAD (SolidWorks).</figcaption></figure>
+  </div>
+</section>
+
+
+<footer>All projects shown are personal projects. Renders, drawings and data are my own work.</footer>
+</div>
+
+</body></html>
